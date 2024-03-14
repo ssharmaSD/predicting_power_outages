@@ -43,6 +43,7 @@ With that being said let us begin cleaning the data set and do some exploration.
 
 
 ## Data Cleaning and Exploratory Data Analysis
+
 1. Dropping irrelevant columns 
 
 I only want to use the most relevant columns. Some of the main columns that I will be dropping regard population and land vs water percentage information that I do not believe will be very useful in the context of this problem. 
@@ -50,24 +51,35 @@ Other columns that I will remove involve the start date and time and restoration
 Some other information that I will drop is columns that are derived from others such as postal codes or month which serve more as identification of the row rather than providing any information that we can use to predict anything. 
 
 2. Adjusting column naming convention 
+
 The naming convention of all of the columns is quite inconvenient since it is in all caps when data frame columns are usually in snake case. So I am going to convert all of these column names accordingly.
 Now instead of having columns named `OBS` and `CLIMATE.REGION` they are not called `obs` and `climate_region`. 
 
 3. Creating outage duration bins 
+
 Later in this project I will be classifying the predicted durations of a power outage. In order to understand that I need to figure out various groups or bins to classify the most common groups of how long a power outage lasts. To do this I am going to follow the steps listed below:
 - Create a box plot to see where most of the data lies
 - Remove outlier data points 
 - Determine the most appropriate bins 
 - Create a `duration_bins` columns to reflect results 
 
-## INSERT BOX PLOT HERE 
-/Users/suhanisharma/Desktop/predicting_power_outages 
+<iframe
+  src="assets_plots/boxplot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe> 
 
 We notice from the above boxplot that our maximum value of a power outage is significantly higher than all other values which means it is justifialbe to drop values that are greater than our 75th percentile.
 
 Before I determine the most appropriate bins I will transform the outage_duration column into outage_duration_hours so that the information is a little easier to understand.
 
-## INSERT HISTOGRAM OF BINS 
+<iframe
+  src="assets_plots/histogram.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe> 
 
 From the histogram above it is clear that the most relevant bins are: 0-10 hours, 11-20 hours, 21-30 hours, 31-40 hours, and 41-50 hours. So now I am able to create an additional column that stores the power outage durations in their bin format. 
 
@@ -80,6 +92,10 @@ However what I found was that there did not seem there was any such correlation 
 
 6. Understanding the relationship between `res_sales`, `com_sales`, `ind_sales`, and `total_sales` 
 I notice that there are various columns which are broken up into sub-categories. For example the data frame includes the res_sales, com_sales, and ind_sales columns which respectively represent the electricity consumption in megawatts per hour of residential, commerical, and industrial sectors. The data frame also had a `total_sales` column which I validated was simply the sum of the earlier three columns. Since the `total_sales` column does not provide any additional information I decided to drop it and any other column that is simply the total of its associated `res`, `com`, and `ind` columns. 
+
+With that we have the final cleaned data frame which looks like the following: 
+### INSERT THE DATA FRAME HERE
+print(counts[['Quarter', 'Count']].head().to_markdown(index=False))
 
 ### Univariate Analysis 
 
