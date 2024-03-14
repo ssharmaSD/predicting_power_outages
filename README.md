@@ -43,5 +43,29 @@ With that being said let us begin cleaning the data set and do some exploration.
 
 
 ## Data Cleaning and Exploratory Data Analysis
-> Dropping irrelevant columns 
-I will begin with the process of data cleaning. I am only going to take the most relevant columns from the data. Some of the main columns that I will be dropping regard population and land vs water percentage information that I do not believe will be very useful in the context of this problem. Some other columns that I am also going to remove involve the start date and time and restoration date and time columns. It is redundant to have this information given that we already have a column of the duration of every outage which can essentially be derived from those four other columns. Some other information that I will drop is columns that are derived from others such as postal codes or month which serve more as identification of the row rather than providing any information that we can use to predict anything. 
+1. Dropping irrelevant columns 
+
+I only want to use the most relevant columns. Some of the main columns that I will be dropping regard population and land vs water percentage information that I do not believe will be very useful in the context of this problem. 
+Other columns that I will remove involve the start date and time and restoration date and time columns. It is redundant to have this information given that we already have a column of the duration of every outage in minutes which can essentially be derived from those four other columns. 
+Some other information that I will drop is columns that are derived from others such as postal codes or month which serve more as identification of the row rather than providing any information that we can use to predict anything. 
+
+2. Adjusting column naming convention 
+The naming convention of all of the columns is quite inconvenient since it is in all caps when data frame columns are usually in snake case. So I am going to convert all of these column names accordingly.
+Now instead of having columns named `OBS` and `CLIMATE.REGION` they are not called `obs` and `climate_region`. 
+
+3. Creating outage duration bins 
+Later in this project I will be classifying the predicted durations of a power outage. In order to understand that I need to figure out various groups or bins to classify the most common groups of how long a power outage lasts. To do this I am going to follow the steps listed below:
+- [ ] Create a box plot to see where most of the data lies
+- [ ] Remove outlier data points 
+- [ ] Determine the most appropriate bins 
+- [ ] Create a `duration_bins` columns to reflect results 
+
+## INSERT BOX PLOT HERE 
+
+
+### Univariate Analysis 
+
+### Bivariate Analysis 
+
+### Interesting Aggregates
+
