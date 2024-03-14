@@ -55,17 +55,43 @@ Now instead of having columns named `OBS` and `CLIMATE.REGION` they are not call
 
 3. Creating outage duration bins 
 Later in this project I will be classifying the predicted durations of a power outage. In order to understand that I need to figure out various groups or bins to classify the most common groups of how long a power outage lasts. To do this I am going to follow the steps listed below:
-- [ ] Create a box plot to see where most of the data lies
-- [ ] Remove outlier data points 
-- [ ] Determine the most appropriate bins 
-- [ ] Create a `duration_bins` columns to reflect results 
+- Create a box plot to see where most of the data lies
+- Remove outlier data points 
+- Determine the most appropriate bins 
+- Create a `duration_bins` columns to reflect results 
 
 ## INSERT BOX PLOT HERE 
+/Users/suhanisharma/Desktop/predicting_power_outages 
 
+We notice from the above boxplot that our maximum value of a power outage is significantly higher than all other values which means it is justifialbe to drop values that are greater than our 75th percentile.
+
+Before I determine the most appropriate bins I will transform the outage_duration column into outage_duration_hours so that the information is a little easier to understand.
+
+## INSERT HISTOGRAM OF BINS 
+
+From the histogram above it is clear that the most relevant bins are: 0-10 hours, 11-20 hours, 21-30 hours, 31-40 hours, and 41-50 hours. So now I am able to create an additional column that stores the power outage durations in their bin format. 
+
+4. NaN values in the `climate_region` column 
+I noticed is that states outside of the continental United States did not have values for their `climate_region` column. While the number of rows may be insignificant compared to the entire data frame at large, I am going to impute the value 'Non Continental' into this column since I intend to use `climate_region` for my prediction later. 
+
+5. Analyzing the `cause_category` and `cause_category_detail`columns
+Similar to the `climate_region` column, I plan on using the `cause_category` column as a prediction feature. This column is also associated with the `cause_category_detail` column so I analyzed if there was any sort of relationship. In my investigation I wanted to see if perhaps certain values of `cause_category` were often associated with certain `cause_category_detail` values. My assumption was that if there was some sort of association then that meant the `cause_category_detail` included potentially useful information. 
+However what I found was that there did not seem there was any such correlation so my conclusion was to drop the `cause_category_detail` column altogether.
+
+6. Understanding the relationship between `res_sales`, `com_sales`, `ind_sales`, and `total_sales` 
+I notice that there are various columns which are broken up into sub-categories. For example the data frame includes the res_sales, com_sales, and ind_sales columns which respectively represent the electricity consumption in megawatts per hour of residential, commerical, and industrial sectors. The data frame also had a `total_sales` column which I validated was simply the sum of the earlier three columns. Since the `total_sales` column does not provide any additional information I decided to drop it and any other column that is simply the total of its associated `res`, `com`, and `ind` columns. 
 
 ### Univariate Analysis 
+
 
 ### Bivariate Analysis 
 
 ### Interesting Aggregates
 
+
+## Assessment of Missingness
+## Hypothesis Testing
+## Framing a Prediction Problem
+## Baseline Model
+## Final Model
+## Fairness Analysis
