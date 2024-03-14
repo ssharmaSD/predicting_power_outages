@@ -12,17 +12,17 @@ Since my main objective is to understand when and where outages happen, timestam
 
 | Column Name                | Description                                                                              |
 |----------------------------|------------------------------------------------------------------------------------------|
-| OUTAGE.START.DATE          | Timestamp information for the date at which the outage began                              |
-| OUTAGE.START.TIME          | Timestamp information for the time at which the outage began                              |
-| OUTAGE.DURATION            | Duration of the outage in minutes                                                         |
-| CUSTOMERS.AFFECTED         | Number of customers affected by the outage                                                |
-| OUTAGE.RESTORATION.DATE    | Timestamp information for the date at which the outage ended                              |
-| OUTAGE.RESTORATION.TIME    | Timestamp information for the time at which the outage ended                              |
-| DEMAND.LOSS.MW             | Amount of peak demand lost during the outage in megawatts                                  |
-| CLIMATE.REGION             | Specified climate region of the particular outage as detailed by the National Centers for Environmental Information |
-| CLIMATE.CATEGORY           | Climate episode of the outage during that particular year, can be 'Warm', 'Cold', or 'Normal' |
-| CAUSE.CATEGORY             | Category of all events that caused this power outage                                       |
-| CAUSE.CATEGORY.DETAIL      | Detailed description of the power outage cause                                             |
+| `OUTAGE.START.DATE`          | Timestamp information for the date at which the outage began                              |
+| `OUTAGE.START.TIME`          | Timestamp information for the time at which the outage began                              |
+| `OUTAGE.DURATION`            | Duration of the outage in minutes                                                         |
+| `CUSTOMERS.AFFECTED`         | Number of customers affected by the outage                                                |
+| `OUTAGE.RESTORATION.DATE`    | Timestamp information for the date at which the outage ended                              |
+| `OUTAGE.RESTORATION.TIME`    | Timestamp information for the time at which the outage ended                              |
+| `DEMAND.LOSS.MW`             | Amount of peak demand lost during the outage in megawatts                                  |
+| `CLIMATE.REGION`           | Specified climate region of the particular outage as detailed by the National Centers for Environmental Information |
+| `CLIMATE.CATEGORY`           | Climate episode of the outage during that particular year, can be 'Warm', 'Cold', or 'Normal' |
+| `CAUSE.CATEGORY`             | Category of all events that caused this power outage                                       |
+| `CAUSE.CATEGORY.DETAIL`      | Detailed description of the power outage cause                                             |
 
 Some prediction factors that we might want to consider would involve the surrounding circumstances of the outage. Beyond what has already been discussed, this section could include:
 'CLIMATE.REGION' - the specified climate region of the particular outage as detailed by the National Centers for Environmental Information
