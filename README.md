@@ -96,8 +96,13 @@ However what I found was that there did not seem there was any such correlation 
 I notice that there are various columns which are broken up into sub-categories. For example the data frame includes the res_sales, com_sales, and ind_sales columns which respectively represent the electricity consumption in megawatts per hour of residential, commerical, and industrial sectors. The data frame also had a `total_sales` column which I validated was simply the sum of the earlier three columns. Since the `total_sales` column does not provide any additional information I decided to drop it and any other column that is simply the total of its associated `res`, `com`, and `ind` columns. 
 
 With that we have the final cleaned data frame which looks like the following: 
-### INSERT THE DATA FRAME HERE
-print(counts[['Quarter', 'Count']].head().to_markdown(index=False))
+|   obs |   year | us_state   | climate_region     |   anomaly_level | climate_category   | cause_category     |   outage_duration_min |   demand_loss_mw |   customers_affected |   res_price |   com_price |   ind_price |   res_sales |   com_sales |   ind_sales |   res_percen |   com_percen |   ind_percen |   pc_realgsp_rel |   areapct_urban |   outage_duration_hour | duration_bin   |
+|------:|-------:|:-----------|:-------------------|----------------:|:-------------------|:-------------------|----------------------:|-----------------:|---------------------:|------------:|------------:|------------:|------------:|------------:|------------:|-------------:|-------------:|-------------:|-----------------:|----------------:|-----------------------:|:---------------|
+|     2 |   2014 | Minnesota  | East North Central |            -0.1 | normal             | intentional attack |                     1 |              nan |                  nan |       12.12 |        9.71 |        6.49 | 1.58699e+06 | 1.80776e+06 | 1.88793e+06 |      30.0325 |      34.2104 |      35.7276 |          1.08979 |            2.14 |              0.0166667 | 0-10           |
+|     4 |   2012 | Minnesota  | East North Central |            -0.1 | normal             | severe weather     |                  2550 |              nan |                68200 |       11.79 |        9.25 |        6.71 | 1.85152e+06 | 1.94117e+06 | 1.99303e+06 |      31.9941 |      33.5433 |      34.4393 |          1.07148 |            2.14 |             42.5       | 41-50          |
+|     5 |   2015 | Minnesota  | East North Central |             1.2 | warm               | severe weather     |                  1740 |              250 |               250000 |       13.07 |       10.16 |        7.74 | 2.02888e+06 | 2.16161e+06 | 1.77794e+06 |      33.9826 |      36.2059 |      29.7795 |          1.09203 |            2.14 |             29         | 21-30          |
+|     6 |   2010 | Minnesota  | East North Central |            -1.4 | cold               | severe weather     |                  1860 |              nan |                60000 |       10.63 |        8.34 |        6.15 | 1.67635e+06 | 1.78614e+06 | 1.90987e+06 |      31.1928 |      33.2358 |      35.5382 |          1.06683 |            2.14 |             31         | 31-40          |
+|     9 |   2015 | Minnesota  | East North Central |             0.6 | warm               | intentional attack |                   155 |               20 |                 5941 |       11.53 |        8.89 |        6.61 | 1.8443e+06  | 1.95687e+06 | 1.79586e+06 |      32.9369 |      34.9472 |      32.072  |          1.09203 |            2.14 |              2.58333   | 0-10           |
 
 ### Univariate Analysis 
 
@@ -159,8 +164,58 @@ To get a better idea of the density let's try a heatmap instead where we use gro
 ### Interesting Aggregates
 Let's continue this exploration by doing aggregate analysis of the data on a larger scale. We can look at the averages of various variables and group them based on their respective states. 
 
-### INSERT PIVOT TABLE HERE 
-The full pivot table is not shown but what we can find is that the state with the most number of customers affected by an outage on average and that has the most megawatts of demand los on average is South Carolina. 
+| us_state             |   customers_affected |   demand_loss_mw |
+|:---------------------|---------------------:|-----------------:|
+| Alabama              |              83881.3 |        291.5     |
+| Arizona              |              62803.4 |       1500.25    |
+| Arkansas             |              45194.2 |        149.9     |
+| California           |             111982   |        731.679   |
+| Colorado             |              50185.2 |        189       |
+| Connecticut          |              43500   |         34.1667  |
+| Delaware             |                800   |          4.13043 |
+| District of Columbia |              97946.4 |        420       |
+| Florida              |             255756   |        775.4     |
+| Georgia              |             103803   |        444.667   |
+| Hawaii               |             147237   |        536       |
+| Idaho                |               7000   |        133.143   |
+| Illinois             |             192780   |        203.5     |
+| Indiana              |              47304.6 |        117.25    |
+| Iowa                 |             118333   |        383.333   |
+| Kansas               |              23333.3 |          0       |
+| Kentucky             |             142162   |        172       |
+| Louisiana            |             185535   |        147.6     |
+| Maine                |              42331.1 |         38.125   |
+| Maryland             |              52640.6 |        120.048   |
+| Massachusetts        |              89145.8 |       2657.89    |
+| Michigan             |             101451   |       1058.82    |
+| Minnesota            |              62870.3 |         67.5     |
+| Mississippi          |               5000   |         15       |
+| Missouri             |              59000   |        162.2     |
+| Nebraska             |             123106   |        381       |
+| Nevada               |              22220   |         14       |
+| New Hampshire        |              13869.8 |          0       |
+| New Jersey           |              48301.8 |        106.455   |
+| New Mexico           |             166667   |        346.667   |
+| New York             |             226893   |        933.733   |
+| North Carolina       |              84226.7 |        959.917   |
+| North Dakota         |              34500   |        155       |
+| Ohio                 |              36521.9 |        143.727   |
+| Oklahoma             |              47354.4 |        125.625   |
+| Oregon               |              16700.3 |         67.1111  |
+| Pennsylvania         |             114924   |        177.25    |
+| South Carolina       |             382795   |       3282.67    |
+| South Dakota         |                nan   |        228.5     |
+| Tennessee            |              69491.2 |        434.625   |
+| Texas                |             156638   |        447.333   |
+| Utah                 |              10714.8 |        186.048   |
+| Vermont              |                  0   |          0       |
+| Virginia             |             129627   |        374.857   |
+| Washington           |              47833   |        215.793   |
+| West Virginia        |              66383   |         24       |
+| Wisconsin            |              37595   |        119.857   |
+| Wyoming              |              11833.3 |         26.75    |
+
+ What we can find is that the state with the most number of customers affected by an outage on average and that has the most megawatts of demand los on average is South Carolina. 
 
 The fact that the state with the most customers affected on average is the same as the one with the most demand loss on average indicated that perhaps there is a correlation between these two variables that will be worth exploring later.
 
@@ -175,14 +230,37 @@ The data frame from earlier showed that there is nothing to indicate that any of
 
 Now we can look into values that might be Missing at Random (MAR) which also means the reason they are missing is dependent on the other columns in the data frame. A non-trivial column with missing values that I want to look into is the `res_price` column. One of the columns that I believe res_price might be dependent upon is the `climate_category` as different climate areas may have different trends in how much they charge for electricity. Without this information it might be hard to determine the price of electricity in that area.
 
-I am going to create a new column of boolean values for if the `total_price` is missing in that row. 
+Below is a bar plot that shows how the missingness of `res_price` differs in different climate categories.
 
+<iframe
+  src="assets_plots/climate_dist_plot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe> 
 
+From the graph we can see that only when the value of `climate_category` is equal to 'normal' do we have a missing value in the `res_price` column. 
+Our permutation test will use the total variation distance (TVD) as the test statistic and have a significance level of 0.01. Below are the hypotheses.
 
-Present and interpret the results of your missingness permutation tests with respect to your data and question. Embed a plotly plot related to your missingness exploration; ideas include:
-• The distribution of column Y when column X is missing and the distribution of column Y when column X is not missing, as was done in Lecture 8.
-• The empirical distribution of the test statistic used in one of your permutation tests, along with the observed statistic.
+Null hypothesis: The distribution of missingness for `res_price` is not dependent upon `climate_category`.
 
+Alternative hypothesis: The distribution of missingness for `res_price` is dependent upon `climate_category`.
+
+The observed test statistic is 0.51 for reference.
+
+After our permutation testing where we used the Total Variation Distance (TVD) as the test statistic what we find is that the p-value is equal to 0.0 which is significantly lower than our significance level of 0.01 which means that we **reject** our null hypothesis meaning that we have sufficient evidence to suggest that the `res_price` missingness is dependent upon `climate_category`. 
+
+Let's try this process again but with the `cause_category`.
+
+<iframe
+  src="assets_plots/cause_dist_plot.html"
+  width="800"
+  height="600"
+  frameborder="0"
+></iframe> 
+
+For reference the observed test statistic is 0.18
+While the graph is not the most helpful in showing us how missingness of `res_price` is related to `cause_category` we do obtain a p-value of 0.484 which is certainly higher than our significance level meaning that we **fail to reject** the null hypothesis. 
 
 
 ## Hypothesis Testing
@@ -228,15 +306,22 @@ The information that I will be using in my model is the following list of column
 - `pc_realgsp_rel`
 - `demand_loss_mw`
 
-My initial model will be a Decision Tree Classifier however it will require that I encode the nominal column of `climate_region` which will be done using One-Hot Encoding. 
-The hyper-parameter of the will include:
+My initial model will be a Decision Tree Classifier which will take in all of the features that I input and find patterns by which I can classify them into 'severe' and 'non-severe' groups. 
+
+Note: this process will require that I encode the nominal column of `climate_region` which will be done using One-Hot Encoding for the model's pipeline.
+
+The hyper-parameter of the Decision Tree will include:
 - maximum depth of 5
 - criterion of entropy
 - minimum of 100 samples per leaf node 
 
-The resulting values that I used to measure accuracy were R squared which is a metric that ranges from 0 to 1. We can think of these as almost like a percentage of accuracy. From the variables above we can see that the model has an accuracy of about 75% on the training data sets and of about 69% on the testing set. One thing to note is that this level of accuracy is not very much better than if we were to guess 0-10 about 65% of the time and hope we are correct since 65% of the values are that value. 
-While this can be considered a decent starting point there are certainly improvements to be made. s
-
+The resulting values that I used to measure accuracy were R squared which is a metric that ranges from 0 to 1. We can think of these as almost like a percentage of accuracy. From the variables above we find that the model has an accuracy of about 75% on the training data sets and of about 69% on the testing set. One thing to note is that this level of accuracy is not very much better than if we were to guess 0-10 about 65% of the time and hope we are correct since 65% of the values are that value. 
+While this can be considered a decent starting point there are certainly improvements to be made.
 
 ## Final Model
+
+
 ## Fairness Analysis
+
+Clearly state your choice of Group X and Group Y, your evaluation metric, your null and alternative hypotheses, your choice of test statistic and significance level, the resulting 
+p-value, and your conclusion.
