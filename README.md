@@ -129,6 +129,7 @@ The first trend I wanted to explore was if different states have varying power o
 
 <iframe
   src="assets_plots/bar_chart.html"
+  width="800"
   height="450"
   frameborder="0"
 ></iframe> 
@@ -142,7 +143,7 @@ The data set that I am using covers about 16 years of data, from the year 2000 t
 <iframe
   src="assets_plots/line.html"
   width="800"
-  height="600"
+  height="450"
   frameborder="0"
 ></iframe> 
 
@@ -160,7 +161,7 @@ The first thing I am curious about is if there is any correlation between the re
 <iframe
   src="assets_plots/scatter.html"
   width="800"
-  height="600"
+  height="450"
   frameborder="0"
 ></iframe> 
 
@@ -173,7 +174,7 @@ To get a better idea of the density let's try a heatmap instead where we use gro
 <iframe
   src="assets_plots/heat_map.html"
   width="800"
-  height="600"
+  height="450"
   frameborder="0"
 ></iframe> 
 
@@ -256,7 +257,7 @@ Below is a bar plot that shows how the missingness of `res_price` differs in dif
 <iframe
   src="assets_plots/climate_dist_plot.html"
   width="800"
-  height="600"
+  height="450"
   frameborder="0"
 ></iframe> 
 
@@ -276,7 +277,7 @@ Let's try this process again but with the `cause_category`.
 <iframe
   src="assets_plots/cause_dist_plot.html"
   width="800"
-  height="600"
+  height="450"
   frameborder="0"
 ></iframe> 
 
