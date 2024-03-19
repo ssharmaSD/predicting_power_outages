@@ -77,7 +77,7 @@ Before I determine the most appropriate bins I will transform the outage_duratio
 <iframe
   src="assets_plots/histogram.html"
   width="800"
-  height="500"
+  height="450"
   frameborder="0"
 ></iframe> 
 
@@ -96,13 +96,30 @@ However what I found was that there did not seem there was any such correlation 
 I notice that there are various columns which are broken up into sub-categories. For example the data frame includes the res_sales, com_sales, and ind_sales columns which respectively represent the electricity consumption in megawatts per hour of residential, commerical, and industrial sectors. The data frame also had a `total_sales` column which I validated was simply the sum of the earlier three columns. Since the `total_sales` column does not provide any additional information I decided to drop it and any other column that is simply the total of its associated `res`, `com`, and `ind` columns. 
 
 With that we have the final cleaned data frame which looks like the following: 
-|   obs |   year | us_state   | climate_region     |   anomaly_level | climate_category   | cause_category     |   outage_duration_min |   demand_loss_mw |   customers_affected |   res_price |   com_price |   ind_price |   res_sales |   com_sales |   ind_sales |   res_percen |   com_percen |   ind_percen |   pc_realgsp_rel |   areapct_urban |   outage_duration_hour | duration_bin   |
-|------:|-------:|:-----------|:-------------------|----------------:|:-------------------|:-------------------|----------------------:|-----------------:|---------------------:|------------:|------------:|------------:|------------:|------------:|------------:|-------------:|-------------:|-------------:|-----------------:|----------------:|-----------------------:|:---------------|
-|     2 |   2014 | Minnesota  | East North Central |            -0.1 | normal             | intentional attack |                     1 |              nan |                  nan |       12.12 |        9.71 |        6.49 | 1.58699e+06 | 1.80776e+06 | 1.88793e+06 |      30.0325 |      34.2104 |      35.7276 |          1.08979 |            2.14 |              0.0166667 | 0-10           |
-|     4 |   2012 | Minnesota  | East North Central |            -0.1 | normal             | severe weather     |                  2550 |              nan |                68200 |       11.79 |        9.25 |        6.71 | 1.85152e+06 | 1.94117e+06 | 1.99303e+06 |      31.9941 |      33.5433 |      34.4393 |          1.07148 |            2.14 |             42.5       | 41-50          |
-|     5 |   2015 | Minnesota  | East North Central |             1.2 | warm               | severe weather     |                  1740 |              250 |               250000 |       13.07 |       10.16 |        7.74 | 2.02888e+06 | 2.16161e+06 | 1.77794e+06 |      33.9826 |      36.2059 |      29.7795 |          1.09203 |            2.14 |             29         | 21-30          |
-|     6 |   2010 | Minnesota  | East North Central |            -1.4 | cold               | severe weather     |                  1860 |              nan |                60000 |       10.63 |        8.34 |        6.15 | 1.67635e+06 | 1.78614e+06 | 1.90987e+06 |      31.1928 |      33.2358 |      35.5382 |          1.06683 |            2.14 |             31         | 31-40          |
-|     9 |   2015 | Minnesota  | East North Central |             0.6 | warm               | intentional attack |                   155 |               20 |                 5941 |       11.53 |        8.89 |        6.61 | 1.8443e+06  | 1.95687e+06 | 1.79586e+06 |      32.9369 |      34.9472 |      32.072  |          1.09203 |            2.14 |              2.58333   | 0-10           |
+### REPLACE THE DATAFRAME WITH THE MORE BROKEN UP ONE AND SEE IF THAT HELPS 
+|   obs |   year | us_state   | climate_region     |   anomaly_level | climate_category   | cause_category     |
+|------:|-------:|:-----------|:-------------------|----------------:|:-------------------|:-------------------|
+|     2 |   2014 | Minnesota  | East North Central |            -0.1 | normal             | intentional attack |
+|     4 |   2012 | Minnesota  | East North Central |            -0.1 | normal             | severe weather     |
+|     5 |   2015 | Minnesota  | East North Central |             1.2 | warm               | severe weather     |
+|     6 |   2010 | Minnesota  | East North Central |            -1.4 | cold               | severe weather     |
+|     9 |   2015 | Minnesota  | East North Central |             0.6 | warm               | intentional attack | 
+
+|   demand_loss_mw |   customers_affected |   res_price |   com_price |   ind_price |   res_sales |   com_sales |
+|-----------------:|---------------------:|------------:|------------:|------------:|------------:|------------:|
+|              nan |                  nan |       12.12 |        9.71 |        6.49 | 1.58699e+06 | 1.80776e+06 |
+|              nan |                68200 |       11.79 |        9.25 |        6.71 | 1.85152e+06 | 1.94117e+06 |
+|              250 |               250000 |       13.07 |       10.16 |        7.74 | 2.02888e+06 | 2.16161e+06 |
+|              nan |                60000 |       10.63 |        8.34 |        6.15 | 1.67635e+06 | 1.78614e+06 |
+|               20 |                 5941 |       11.53 |        8.89 |        6.61 | 1.8443e+06  | 1.95687e+06 |
+
+|   ind_sales |   res_percen |   com_percen |   ind_percen |   pc_realgsp_rel |   areapct_urban |   outage_duration_hour | duration_bin   |
+|------------:|-------------:|-------------:|-------------:|-----------------:|----------------:|-----------------------:|:---------------|
+| 1.88793e+06 |      30.0325 |      34.2104 |      35.7276 |          1.08979 |            2.14 |              0.0166667 | 0-10           |
+| 1.99303e+06 |      31.9941 |      33.5433 |      34.4393 |          1.07148 |            2.14 |             42.5       | 41-50          |
+| 1.77794e+06 |      33.9826 |      36.2059 |      29.7795 |          1.09203 |            2.14 |             29         | 21-30          |
+| 1.90987e+06 |      31.1928 |      33.2358 |      35.5382 |          1.06683 |            2.14 |             31         | 31-40          |
+| 1.79586e+06 |      32.9369 |      34.9472 |      32.072  |          1.09203 |            2.14 |              2.58333   | 0-10           |
 
 ### Univariate Analysis 
 
@@ -112,8 +129,7 @@ The first trend I wanted to explore was if different states have varying power o
 
 <iframe
   src="assets_plots/bar_chart.html"
-  width="800"
-  height="500"
+  height="450"
   frameborder="0"
 ></iframe> 
 
@@ -204,7 +220,7 @@ Let's continue this exploration by doing aggregate analysis of the data on a lar
 | Oregon               |              16700.3 |         67.1111  |
 | Pennsylvania         |             114924   |        177.25    |
 | South Carolina       |             382795   |       3282.67    |
-| South Dakota         |                nan   |        228.5     |
+| South Dakota         |                0     |        228.5     |
 | Tennessee            |              69491.2 |        434.625   |
 | Texas                |             156638   |        447.333   |
 | Utah                 |              10714.8 |        186.048   |
@@ -214,6 +230,11 @@ Let's continue this exploration by doing aggregate analysis of the data on a lar
 | West Virginia        |              66383   |         24       |
 | Wisconsin            |              37595   |        119.857   |
 | Wyoming              |              11833.3 |         26.75    |
+
+ outages.head()
+print(outages.iloc[:, :7].head().to_markdown(index=False))
+print(outages.iloc[:, 8:15].head().to_markdown(index=False))
+print(outages.iloc[:, 15:].head().to_markdown(index=False))
 
  What we can find is that the state with the most number of customers affected by an outage on average and that has the most megawatts of demand los on average is South Carolina. 
 
@@ -319,9 +340,29 @@ The resulting values that I used to measure accuracy were R squared which is a m
 While this can be considered a decent starting point there are certainly improvements to be made.
 
 ## Final Model
+The new features that I added were `cause_category` and `areapct_urban`.
+The reason I thought it would be beneficial to add the cause category is because for the same reason that certain areas of climate are more likely than others to experience more severe outages than others I also thought that outages caused by certain issues or failures were more likely to be harder to remedy than others. I included `areapct_urban` because I thought that if an area has a greater urban population then outages might be less likely to be severe since returning the power would be a very large priority in such urban settings. 
+
+They were good for my prediction model because they allowed me to generalize the data a bit more and from the results they did not lead to overfitting in the model the increase in my testing and trainig accuracies was consistern for both changes.
+
+The biggest change that I made to the Final Model compared to the Baseline was using a Random Forest rather than just a single Decision Tree. While a Decision Tree uses the parameters that it has to make the best classifications, a Random Forest will make lots of different trees and try many other methods before returning the one with the best performance out of all of them. This helps me simultaneously improve training and testing accuracy with less risk of overfitting my data. 
+The modeling algorithm I chose involved encoding all the categorical variables so that the random forest could use numerical values in its classification. I also made sure to standardize the customers affected column as I did not want there to be a major skew between areas that had a lot of customers affected just because the state is one with a much larger population or square footage than another. 
+The hyper-parameters I explored in Grid Search were: 
+- criterion
+- maximum tree depth 
+- number of estimation decision trees to create 
+
+My Grid Search returned the following as the optimal parameters:
+- criterion: 'gini'
+- maximum tree depth: 10
+- number of estimatino decision trees: 80
 
 
 ## Fairness Analysis
+### need to finish this section 
 
 Clearly state your choice of Group X and Group Y, your evaluation metric, your null and alternative hypotheses, your choice of test statistic and significance level, the resulting 
 p-value, and your conclusion.
+
+
+## need to do a full run through of the website checking that all the criteria are met 
