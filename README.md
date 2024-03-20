@@ -96,7 +96,6 @@ However what I found was that there did not seem there was any such correlation 
 I notice that there are various columns which are broken up into sub-categories. For example the data frame includes the res_sales, com_sales, and ind_sales columns which respectively represent the electricity consumption in megawatts per hour of residential, commerical, and industrial sectors. The data frame also had a `total_sales` column which I validated was simply the sum of the earlier three columns. Since the `total_sales` column does not provide any additional information I decided to drop it and any other column that is simply the total of its associated `res`, `com`, and `ind` columns. 
 
 With that we have the final cleaned data frame which looks like the following: 
-### see if this is finally formatted correctly
 
 |   obs |   year | us_state   | climate_region     |   anomaly_level | climate_category   | cause_category     |
 |------:|-------:|:-----------|:-------------------|----------------:|:-------------------|:-------------------|
