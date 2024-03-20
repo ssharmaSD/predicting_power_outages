@@ -97,13 +97,14 @@ I notice that there are various columns which are broken up into sub-categories.
 
 With that we have the final cleaned data frame which looks like the following: 
 ### see if this is finally formatted correctly
-| obs | year | us_state  | climate_region    | anomaly_level | climate_category | cause_category     | outage_duration_min | demand_loss_mw | customers_affected | res_price | com_price | ind_price | res_sales    | com_sales    | ind_sales    | res_percen | com_percen | ind_percen | pc_realgsp_rel | areapct_urban | outage_duration_hour | duration_bin |
-|-----|------|-----------|-------------------|---------------|------------------|-------------------|---------------------|----------------|--------------------|-----------|-----------|-----------|--------------|--------------|--------------|-------------|-------------|-------------|-----------------|----------------|----------------------|--------------|
-| 2   | 2014 | Minnesota | East North Central| -0.1          | normal           | intentional attack| 1                   | nan            | nan                | 12.12     | 9.71      | 6.49      | 1.58699e+06  | 1.80776e+06  | 1.88793e+06  | 30.0325     | 34.2104     | 35.7276     | 1.08979         | 2.14           | 0.0166667            | 0-10         |
-| 4   | 2012 | Minnesota | East North Central| -0.1          | normal           | severe weather    | 2550                | nan            | 68200              | 11.79     | 9.25      | 6.71      | 1.85152e+06  | 1.94117e+06  | 1.99303e+06  | 31.9941     | 33.5433     | 34.4393     | 1.07148         | 2.14           | 42.5                  | 41-50        |
-| 5   | 2015 | Minnesota | East North Central| 1.2           | warm             | severe weather    | 1740                | 250            | 250000             | 13.07     | 10.16     | 7.74      | 2.02888e+06  | 2.16161e+06  | 1.77794e+06  | 33.9826     | 36.2059     | 29.7795     | 1.09203         | 2.14           | 29                    | 21-30        |
-| 6   | 2010 | Minnesota | East North Central| -1.4          | cold             | severe weather    | 1860                | nan            | 60000              | 10.63     | 8.34      | 6.15      | 1.67635e+06  | 1.78614e+06  | 1.90987e+06  | 31.1928     | 33.2358     | 35.5382     | 1.06683         | 2.14           | 31                    | 31-40        |
-| 9   | 2015 | Minnesota | East North Central| 0.6           | warm             | intentional attack| 155                 | 20             | 5941               | 11.53     | 8.89      | 6.61      | 1.8443e+06   | 1.95687e+06  | 1.79586e+06  | 32.9369     | 34.9472     | 32.072      | 1.09203         | 2.14           | 2.58333               | 0-10         |
+|   obs |   year | us_state   | climate_region     |   anomaly_level | climate_category   | cause_category     |
+|------:|-------:|:-----------|:-------------------|----------------:|:-------------------|:-------------------|
+|     2 |   2014 | Minnesota  | East North Central |            -0.1 | normal             | intentional attack |
+|     4 |   2012 | Minnesota  | East North Central |            -0.1 | normal             | severe weather     |
+|     5 |   2015 | Minnesota  | East North Central |             1.2 | warm               | severe weather     |
+|     6 |   2010 | Minnesota  | East North Central |            -1.4 | cold               | severe weather     |
+|     9 |   2015 | Minnesota  | East North Central |             0.6 | warm               | intentional attack |
+
 
 |   demand_loss_mw |   customers_affected |   res_price |   com_price |   ind_price |   res_sales |   com_sales |
 |-----------------:|---------------------:|------------:|------------:|------------:|------------:|------------:|
