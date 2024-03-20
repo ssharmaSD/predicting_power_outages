@@ -97,6 +97,7 @@ I notice that there are various columns which are broken up into sub-categories.
 
 With that we have the final cleaned data frame which looks like the following: 
 ### see if this is finally formatted correctly
+
 |   obs |   year | us_state   | climate_region     |   anomaly_level | climate_category   | cause_category     |
 |------:|-------:|:-----------|:-------------------|----------------:|:-------------------|:-------------------|
 |     2 |   2014 | Minnesota  | East North Central |            -0.1 | normal             | intentional attack |
@@ -104,7 +105,6 @@ With that we have the final cleaned data frame which looks like the following:
 |     5 |   2015 | Minnesota  | East North Central |             1.2 | warm               | severe weather     |
 |     6 |   2010 | Minnesota  | East North Central |            -1.4 | cold               | severe weather     |
 |     9 |   2015 | Minnesota  | East North Central |             0.6 | warm               | intentional attack |
-
 
 |   demand_loss_mw |   customers_affected |   res_price |   com_price |   ind_price |   res_sales |   com_sales |
 |-----------------:|---------------------:|------------:|------------:|------------:|------------:|------------:|
