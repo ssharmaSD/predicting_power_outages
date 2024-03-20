@@ -3,8 +3,8 @@ Author: Suhani Sharma
 This is a data science project that investigates the features that can help us predict if a power outage will be severe based on several factors from previous power outage data. This project is for the UCSD course DSC 80: The Practice and Application of Data Science.
 
 ## Introduction
-The dataset I have chosen covers major power outage data in the continental United States starting from January 2000 up to July 2016.
-The main questions that I want to focus on in this project is: **When and where do major power outages tend to occur? And what variables and characteristics are most likely to lead to a higher severity outage?**
+The dataset I have chosen covers major power outage data in the United States starting from January 2000 up to July 2016.
+The main questions that I want to focus on in this project are: **When and where do major power outages tend to occur? And what variables and characteristics are most likely to lead to a higher severity outage?**
 There is a greater significance to understanding this dataset. By having more in-depth knowledge on these outages there is the possibility of letting people know when outages, especially severe ones, are likely to occur so that they can prepare accordingly.
 This data set contains 1534 rows where each row represents a different instance of a power outage.
 
@@ -53,7 +53,7 @@ Some other information that I will drop is columns that are derived from others 
 **Adjusting column naming convention** 
 
 The naming convention of all of the columns is quite inconvenient since it is in all caps when data frame columns are usually in snake case. So I am going to convert all of these column names accordingly.
-Now instead of having columns named `OBS` and `CLIMATE.REGION` they are not called `obs` and `climate_region`. 
+Now instead of having columns named `OBS` and `CLIMATE.REGION` they are now called `obs` and `climate_region`. 
 
 **Creating outage duration bins**
 
@@ -61,7 +61,7 @@ Later in this project I will be classifying the predicted durations of a power o
 - Create a box plot to see where most of the data lies
 - Remove outlier data points 
 - Determine the most appropriate bins 
-- Create a `duration_bins` columns to reflect results 
+- Create a `duration_bins` columns to reflect the results 
 
 <iframe
   src="assets_plots/boxplot.html"
@@ -85,7 +85,7 @@ Before I determine the most appropriate bins I will transform the outage_duratio
 From the histogram above it is clear that the most relevant bins are: 0-10 hours, 11-20 hours, 21-30 hours, 31-40 hours, and 41-50 hours. So now I am able to create an additional column that stores the power outage durations in their bin format. 
 
 **NaN values in the `climate_region` column** 
-I noticed is that states outside of the continental United States did not have values for their `climate_region` column. While the number of rows may be insignificant compared to the entire data frame at large, I am going to impute the value 'Non Continental' into this column since I intend to use `climate_region` for my prediction later. 
+I noticed is that states outside of the continental United States did not have values for their `climate_region` column. While the number of rows may be insignificant compared to the entire data frame at large, I am going to impute the value 'Non Continental' into this column since I intend to use `climate_region` for my prediction model later. 
 
 **Analyzing the `cause_category` and `cause_category_detail`columns**
 Similar to the `climate_region` column, I plan on using the `cause_category` column as a prediction feature. This column is also associated with the `cause_category_detail` column so I analyzed if there was any sort of relationship. In my investigation I wanted to see if perhaps certain values of `cause_category` were often associated with certain `cause_category_detail` values. My assumption was that if there was some sort of association then that meant the `cause_category_detail` included potentially useful information. 
@@ -96,14 +96,14 @@ However what I found was that there did not seem there was any such correlation 
 I notice that there are various columns which are broken up into sub-categories. For example the data frame includes the res_sales, com_sales, and ind_sales columns which respectively represent the electricity consumption in megawatts per hour of residential, commerical, and industrial sectors. The data frame also had a `total_sales` column which I validated was simply the sum of the earlier three columns. Since the `total_sales` column does not provide any additional information I decided to drop it and any other column that is simply the total of its associated `res`, `com`, and `ind` columns. 
 
 With that we have the final cleaned data frame which looks like the following: 
-### REPLACE THE DATAFRAME WITH THE MORE BROKEN UP ONE AND SEE IF THAT HELPS 
-|   obs |   year | us_state   | climate_region     |   anomaly_level | climate_category   | cause_category     |
-|------:|-------:|:-----------|:-------------------|----------------:|:-------------------|:-------------------|
-|     2 |   2014 | Minnesota  | East North Central |            -0.1 | normal             | intentional attack |
-|     4 |   2012 | Minnesota  | East North Central |            -0.1 | normal             | severe weather     |
-|     5 |   2015 | Minnesota  | East North Central |             1.2 | warm               | severe weather     |
-|     6 |   2010 | Minnesota  | East North Central |            -1.4 | cold               | severe weather     |
-|     9 |   2015 | Minnesota  | East North Central |             0.6 | warm               | intentional attack | 
+### see if this is finally formatted correctly
+| obs | year | us_state  | climate_region    | anomaly_level | climate_category | cause_category     | outage_duration_min | demand_loss_mw | customers_affected | res_price | com_price | ind_price | res_sales    | com_sales    | ind_sales    | res_percen | com_percen | ind_percen | pc_realgsp_rel | areapct_urban | outage_duration_hour | duration_bin |
+|-----|------|-----------|-------------------|---------------|------------------|-------------------|---------------------|----------------|--------------------|-----------|-----------|-----------|--------------|--------------|--------------|-------------|-------------|-------------|-----------------|----------------|----------------------|--------------|
+| 2   | 2014 | Minnesota | East North Central| -0.1          | normal           | intentional attack| 1                   | nan            | nan                | 12.12     | 9.71      | 6.49      | 1.58699e+06  | 1.80776e+06  | 1.88793e+06  | 30.0325     | 34.2104     | 35.7276     | 1.08979         | 2.14           | 0.0166667            | 0-10         |
+| 4   | 2012 | Minnesota | East North Central| -0.1          | normal           | severe weather    | 2550                | nan            | 68200              | 11.79     | 9.25      | 6.71      | 1.85152e+06  | 1.94117e+06  | 1.99303e+06  | 31.9941     | 33.5433     | 34.4393     | 1.07148         | 2.14           | 42.5                  | 41-50        |
+| 5   | 2015 | Minnesota | East North Central| 1.2           | warm             | severe weather    | 1740                | 250            | 250000             | 13.07     | 10.16     | 7.74      | 2.02888e+06  | 2.16161e+06  | 1.77794e+06  | 33.9826     | 36.2059     | 29.7795     | 1.09203         | 2.14           | 29                    | 21-30        |
+| 6   | 2010 | Minnesota | East North Central| -1.4          | cold             | severe weather    | 1860                | nan            | 60000              | 10.63     | 8.34      | 6.15      | 1.67635e+06  | 1.78614e+06  | 1.90987e+06  | 31.1928     | 33.2358     | 35.5382     | 1.06683         | 2.14           | 31                    | 31-40        |
+| 9   | 2015 | Minnesota | East North Central| 0.6           | warm             | intentional attack| 155                 | 20             | 5941               | 11.53     | 8.89      | 6.61      | 1.8443e+06   | 1.95687e+06  | 1.79586e+06  | 32.9369     | 34.9472     | 32.072      | 1.09203         | 2.14           | 2.58333               | 0-10         |
 
 |   demand_loss_mw |   customers_affected |   res_price |   com_price |   ind_price |   res_sales |   com_sales |
 |-----------------:|---------------------:|------------:|------------:|------------:|------------:|------------:|
@@ -232,10 +232,7 @@ Let's continue this exploration by doing aggregate analysis of the data on a lar
 | Wisconsin            |              37595   |        119.857   |
 | Wyoming              |              11833.3 |         26.75    |
 
- outages.head()
-print(outages.iloc[:, :7].head().to_markdown(index=False))
-print(outages.iloc[:, 8:15].head().to_markdown(index=False))
-print(outages.iloc[:, 15:].head().to_markdown(index=False))
+
 
  What we can find is that the state with the most number of customers affected by an outage on average and that has the most megawatts of demand los on average is South Carolina. 
 
@@ -245,12 +242,12 @@ The fact that the state with the most customers affected on average is the same 
 
 ## Assessment of Missingness
 Let us explore the variables that are Not Missing At Random (NMAR). <br>
-The definition of NMAR is the chance that a value is missing because of what that value actually could have been. This also means that the value that is missing is independent of other columns. <br>
+The definition of NMAR is the reason that a value is missing is because of what that value actually could have been. This also means that the missingness of that value is independent of other columns. <br>
 One of the columns that I believe could be interpreted as NMAR is `com_percen` which represents the commercial consumption of electircity compared to the total in a particular state. 
 
-The data frame from earlier showed that there is nothing to indicate that any of the other columns could explain why the commercial percentage of a region is missing. And since commerical percentages is information that would be relevant for any power outage there is also no reason to assume it is missing by design. Therefore one could reason that this column has information that is NMAR as perhaps the value itself was the reason it was marked as NaN or was not recorded.
+The data frame from earlier showed that there is nothing to indicate that any of the other columns could explain why the commercial percentage of a region is missing. And since commerical percentages is information that would be relevant for any power outage there is also no reason to assume it is purposefully omitted missing. Therefore one could reason that this column has information that is NMAR as perhaps the value itself was the reason it was marked as NaN or was not recorded.
 
-Now we can look into values that might be Missing at Random (MAR) which also means the reason they are missing is dependent on the other columns in the data frame. A non-trivial column with missing values that I want to look into is the `res_price` column. One of the columns that I believe res_price might be dependent upon is the `climate_category` as different climate areas may have different trends in how much they charge for electricity. Without this information it might be hard to determine the price of electricity in that area.
+Now we can look into values that might be Missing at Random (MAR) which means the reason they are missing is dependent on some other column(s) in the data frame. A non-trivial column with missing values that I want to look into is the `res_price` column. One of the columns that I believe res_price might be dependent upon is the `climate_category` as different climate areas may have different trends in how much they charge for electricity.
 
 Below is a bar plot that shows how the missingness of `res_price` differs in different climate categories.
 
@@ -268,9 +265,9 @@ Null hypothesis: The distribution of missingness for `res_price` is not dependen
 
 Alternative hypothesis: The distribution of missingness for `res_price` is dependent upon `climate_category`.
 
-The observed test statistic is 0.51 for reference.
+The observed test statistic is 0.51.
 
-After our permutation testing where we used the Total Variation Distance (TVD) as the test statistic what we find is that the p-value is equal to 0.0 which is significantly lower than our significance level of 0.01 which means that we **reject** our null hypothesis meaning that we have sufficient evidence to suggest that the `res_price` missingness is dependent upon `climate_category`. 
+After our permutation testing where we used the Total Variation Distance (TVD) as the test statistic what we find is that the p-value is equal to 0.0 which is significantly lower than our significance level of 0.01 which means that we **reject** our null hypothesis meaning that we have sufficient evidence to suggest that the `res_price` missingness **is** dependent upon `climate_category`. 
 
 Let's try this process again but with the `cause_category`.
 
@@ -281,27 +278,28 @@ Let's try this process again but with the `cause_category`.
   frameborder="0"
 ></iframe> 
 
-For reference the observed test statistic is 0.18
-While the graph is not the most helpful in showing us how missingness of `res_price` is related to `cause_category` we do obtain a p-value of 0.484 which is certainly higher than our significance level meaning that we **fail to reject** the null hypothesis. 
+For reference the observed test statistic in this test is 0.18
+While the graph is not the most helpful in showing us how missingness of `res_price` is related to `cause_category` we do obtain a p-value of 0.476 which is certainly higher than our significance level meaning that we **fail to reject** the null hypothesis.
 
 
 ## Hypothesis Testing
 Now we move on to the hypothesis testing portion of this project. I want to better understand how the duration of a power outage may change depending on the state that we're in. I am particularly interested in information regarding California. Given that this state is particularly dense I would assume that the average power outage duration in California perhaps takes longer that the average power outage in just any state. Therefore I have the following null and alternate hypotheses:
 
 Null hypothesis: The average duration of a power outage anywhere in the United States **is equal to** the average duration of a power outage in California. 
+
 Alternate hypothesis: The average duaration of a power outage in the United States **is less than** the average duration of a power outage in California. 
  
 The significance level I am going to use is 0.05 and my test statistic is going to be the average outage duration in hours for a California power outage. The main reason for this test statistic is to see if the mean deviate a large amount from our observed statistic. 
 The first thing I need to do is determine the observed average outage duration in the entire data frame. 
 The number of samples I will take from the dataframe will be 20% of the number of rows that are for California. 
 
-The resulting p-value was 0.057. Since the p-value is greater than our significance level, we **fail to reject** the null hypothesis which means that we do not have enough evidence to suggest that the average power outage duration in California is significantly greater than the ovearll average power outage duration.  
+The resulting p-value was 0.061. Since the p-value is greater than our significance level, we **fail to reject** the null hypothesis which means that we do not have enough evidence to suggest that the average power outage duration in California is significantly greater than the ovearll average power outage duration.  
 
 
 ## Framing a Prediction Problem
 The type of prediction model I am using is classification, specifically my classifier will be binary classification of the `duration_bin` column. In other words, `duration_bin` is our response variable. 
 
-Currently that column has multiple classes but I will turn it into a binary column of 0's and 1's where 0 represents a non-severe power outage as they are those that 0-10 hours and a severe power outage is one that lasts 10 or more hours.  
+Currently that column has multiple classes but I will turn it into a binary column of 0's and 1's where 0 represents a non-severe power outage as they are those that 0-10 hours and a severe power outage is one that lasts more than 10 hours.  
 
 The metric by which we will evaluate this model is R squared which represents how well our data fits to our model. 
 
@@ -337,7 +335,7 @@ The hyper-parameter of the Decision Tree will include:
 - criterion of entropy
 - minimum of 100 samples per leaf node 
 
-The resulting values that I used to measure accuracy were R squared which is a metric that ranges from 0 to 1. We can think of these as almost like a percentage of accuracy. From the variables above we find that the model has an accuracy of about 75% on the training data sets and of about 69% on the testing set. One thing to note is that this level of accuracy is not very much better than if we were to guess 0-10 about 65% of the time and hope we are correct since 65% of the values are that value. 
+As mentioned, the resulting values that I used to measure accuracy were R squared which is a metric that ranges from 0 to 1. We can think of these as almost like a percentage of accuracy. From the variables above we find that the model has an accuracy of about 75% on the training data sets and of about 69% on the testing set. One thing to note is that this level of accuracy is not very much better than if we were to guess 0-10 about 65% of the time and hope we are correct since 65% of the values are that value. 
 While this can be considered a decent starting point there are certainly improvements to be made.
 
 ## Final Model
@@ -360,10 +358,27 @@ My Grid Search returned the following as the optimal parameters:
 
 
 ## Fairness Analysis
-### need to finish this section 
 
-Clearly state your choice of Group X and Group Y, your evaluation metric, your null and alternative hypotheses, your choice of test statistic and significance level, the resulting 
-p-value, and your conclusion.
+For my fairnes analysis I wanted to explore how the model performs with climate regions that are Western (Group X) and those that are not Western (Group Y) and used the `climate_region` column to make these distinctions.
+> Group X: Western 
+- Southwest
+- Northwest
+- West North Central
+- West 
 
+> Group Y: Non-western
+- East North Central
+- Central
+- South
+- Southeast
+- Northeast
+- Non Continental
 
-## need to do a full run through of the website checking that all the criteria are met 
+The following were the hypotheses that I had for this test.
+Null hypothesis: The classifier model's accuracy is the same for both Western and Non-Western regions, any differences that we see are simply due to chance. 
+
+Alternate hypothesis: The classifier model's accuracy is not the same for both groups due to reasons other than simply chance alone. 
+
+The test statistic that I used wasthe absolute difference in accuracies for the two groups. The significance level that I used was 0.05. 
+
+My permutation test yielded a p-value of 0.888 and because this is greater than our signifcance level it indicates that we **fail to reject** the null hypothesis. 
